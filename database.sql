@@ -1,0 +1,10 @@
+CREATE DATABASE projetR4A10;
+
+USE projetR4A10;
+
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    auteur VARCHAR(50),
+    contenu TEXT,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
