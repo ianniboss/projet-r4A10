@@ -44,7 +44,7 @@
             margin: 5px;
             border-radius: 10px;
             font-size: 14px;
-            margin-bottom : 8px;
+            margin-bottom : 10px;
         }
 
         .me {
@@ -88,6 +88,13 @@
             padding: 8px 12px;
             cursor: pointer;
         }
+
+        .time {
+            font-size: 10px;
+            color: gray;
+            text-align : right;
+            margin-top: 3px;
+        }
     </style>
 </head>
 
@@ -127,11 +134,22 @@ function chargerMessages() {
                 let id = $(this).data("id");
 
                 let classe = (auteur === currentUser) ? "me" : "other";
+                let texte = contenu.replace(auteur + " : ", "");
+
+                let heure = "";
+                let debut = texte.indexOf("(");
+                let fin = texte.indexOf(")");
+
+                if (debut !== -1 && fin !== -1) {
+                    heure = texte.substring(debut + 1, fin);
+                    texte = texte.substring(0, debut).trim();
+                }
 
                 let messageHTML = `
                     <div class="message ${classe}">
                         <div class="author">${auteur}</div>
-                        <div>${contenu.replace(auteur + " : ", "")}</div>
+                        <div>${texte}</div>
+                        <div class="time">${heure}</div>
                     </div>
                 `;
 
