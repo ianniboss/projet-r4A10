@@ -14,7 +14,8 @@ while ($row = $result->fetch_assoc()) {
     echo "<p data-id='" . $row['id'] . "'>";
     echo "<b>" . htmlspecialchars($row['auteur']) . "</b> : ";
     echo htmlspecialchars($row['contenu']);
-    echo " (" . $row['date'] . ")";
+    $date = date("H:i", strtotime($row['date']));
+    echo " <span class='time'>(" . $date . ")</span>";
     echo "</p>";
 }
 
