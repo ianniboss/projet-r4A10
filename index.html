@@ -1,37 +1,143 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat</title>
+    <title>WhatsDown !</title>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #ece5dd;
+            display: flex;
+            justify-content: center;
+        }
+
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #075e54;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        #messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .me {
+            background: #dcf8c6;
+            align-self: flex-end;
+        }
+
+        .other {
+            background: #f1f0f0;
+            align-self: flex-start;
+        }
+
+        .author {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 10px;
+            background: #eee;
+        }
+
+        input {
+            padding: 8px;
+            margin-right: 5px;
+        }
+
+        #auteur {
+            width: 100px;
+        }
+
+        #message {
+            flex: 1;
+        }
+
+        button {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-<h2>Messagerie</h2>
+<div class="chat-container">
 
-<div id="messages" style="border:1px solid black; height:200px; overflow:auto;"></div>
+    <div class="header">Messagerie</div>
 
-<br>
+    <div id="messages"></div>
 
-<input type="text" id="auteur" placeholder="Votre nom">
-<br><br>
-<input type="text" id="message" placeholder="Votre message">
-<button id="envoyer">Envoyer</button>
+    <div class="input-area">
+        <input type="text" id="auteur" placeholder="Nom">
+        <input type="text" id="message" placeholder="Message">
+        <button id="envoyer">Envoyer</button>
+    </div>
+
+</div>
 
 <script>
 
 let last_id = 0;
+let currentUser = "";
 
 function chargerMessages() {
 
     $.get("recuperer.php", { last_id: last_id }, function(data) {
 
         if (data.trim() !== "") {
-            $("#messages").append(data);
 
-            let lastMessage = $("#messages p").last();
-            last_id = lastMessage.data("id");
+            let elements = $(data);
+
+            elements.each(function() {
+
+                let auteur = $(this).find("b").text();
+                let contenu = $(this).text();
+                let id = $(this).data("id");
+
+                let classe = (auteur === currentUser) ? "me" : "other";
+
+                let messageHTML = `
+                    <div class="message ${classe}">
+                        <div class="author">${auteur}</div>
+                        <div>${contenu.replace(auteur + " : ", "")}</div>
+                    </div>
+                `;
+
+                $("#messages").append(messageHTML);
+
+                last_id = id;
+            });
 
             $("#messages").scrollTop($("#messages")[0].scrollHeight);
         }
@@ -50,6 +156,8 @@ $("#envoyer").click(function() {
         alert("Remplis les champs");
         return;
     }
+
+    currentUser = auteur;
 
     $.post("enregistrer.php", {
         auteur: auteur,
