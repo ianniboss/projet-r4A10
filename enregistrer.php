@@ -1,9 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "projetR4A10");
-
-if ($conn->connect_error) {
-    die("Erreur connexion");
-}
+require("config.php");
 
 $auteur = $_POST['auteur'];
 $message = $_POST['message'];
