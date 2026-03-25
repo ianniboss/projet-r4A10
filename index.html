@@ -173,6 +173,11 @@ $("#auteur").on("change", function() {
     let auteur = $(this).val();
     sessionStorage.setItem("user", auteur);
     currentUser = auteur;
+
+    // CLEAR + RELOAD messages
+    $("#messages").html("");
+    last_id = 0;
+    chargerMessages();
 });
 
 $("#message").keyup(function(e) {
