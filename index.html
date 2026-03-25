@@ -44,6 +44,7 @@
             margin: 5px;
             border-radius: 10px;
             font-size: 14px;
+            margin-bottom : 8px;
         }
 
         .me {
@@ -109,7 +110,7 @@
 <script>
 
 let last_id = 0;
-let currentUser = "";
+let currentUser = sessionStorage.getItem("user") || "";
 
 function chargerMessages() {
 
@@ -158,6 +159,7 @@ $("#envoyer").click(function() {
     }
 
     currentUser = auteur;
+    sessionStorage.setItem("user", auteur);
 
     $.post("enregistrer.php", {
         auteur: auteur,
@@ -165,6 +167,12 @@ $("#envoyer").click(function() {
     });
 
     $("#message").val("");
+});
+
+$("#auteur").on("change", function() {
+    let auteur = $(this).val();
+    sessionStorage.setItem("user", auteur);
+    currentUser = auteur;
 });
 
 $("#message").keyup(function(e) {
