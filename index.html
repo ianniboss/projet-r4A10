@@ -192,7 +192,7 @@ $("#auteur").on("change", function() {
     sessionStorage.setItem("user", auteur);
     currentUser = auteur;
 
-    // CLEAR + RELOAD messages
+    // effacer et charger le/les messages
     $("#messages").html("");
     last_id = 0;
     chargerMessages();
