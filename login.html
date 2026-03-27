@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h2>Connexion</h2>
+
+<input type="text" id="pseudo" placeholder="Votre nom">
+<button onclick="login()">Entrer</button>
+
+<script>
+function login() {
+    let pseudo = document.getElementById("pseudo").value;
+
+    if (pseudo === "") {
+        alert("Entre un nom");
+        return;
+    }
+
+    sessionStorage.setItem("user", pseudo);
+
+    window.location = "index.html";
+}
+</script>
+
+</body>
+</html>
