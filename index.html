@@ -107,7 +107,6 @@
     <div id="messages"></div>
 
     <div class="input-area">
-        <input type="text" id="auteur" placeholder="Nom">
         <input type="text" id="message" placeholder="Message">
         <button id="envoyer">Envoyer</button>
     </div>
@@ -115,10 +114,12 @@
 </div>
 
 <script>
-
 let last_id = 0;
-let currentUser = sessionStorage.getItem("user") || "";
+let currentUser = sessionStorage.getItem("user");
 
+if (!currentUser) {
+    window.location = "login.html";
+}
 function chargerMessages() {
 
     $.get("recuperer.php", { last_id: last_id }, function(data) {
@@ -168,16 +169,13 @@ setInterval(chargerMessages, 2000);
 
 $("#envoyer").click(function() {
 
-    let auteur = $("#auteur").val();
+    let auteur = currentUser;
     let message = $("#message").val();
 
     if (auteur === "" || message === "") {
         alert("Remplis les champs");
         return;
     }
-
-    currentUser = auteur;
-    sessionStorage.setItem("user", auteur);
 
     $.post("enregistrer.php", {
         auteur: auteur,
@@ -187,16 +185,6 @@ $("#envoyer").click(function() {
     $("#message").val("");
 });
 
-$("#auteur").on("change", function() {
-    let auteur = $(this).val();
-    sessionStorage.setItem("user", auteur);
-    currentUser = auteur;
-
-    // effacer et charger le/les messages
-    $("#messages").html("");
-    last_id = 0;
-    chargerMessages();
-});
 
 $("#message").keyup(function(e) {
     if (e.keyCode == 13) {
