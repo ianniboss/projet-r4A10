@@ -8,3 +8,10 @@ CREATE TABLE messages (
     contenu TEXT,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- pour gerer la liste des users connectees
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pseudo VARCHAR(50),
+    last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
