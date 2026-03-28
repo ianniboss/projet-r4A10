@@ -14,13 +14,17 @@
 function login() {
     let pseudo = document.getElementById("pseudo").value;
 
-    if (pseudo === "") {
-        alert("Entre un nom");
-        return;
-    }
+    if (pseudo === "") return;
+
+    fetch("login.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "pseudo=" + pseudo
+    });
 
     sessionStorage.setItem("user", pseudo);
-
     window.location = "index.html";
 }
 </script>
