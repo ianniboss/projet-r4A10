@@ -105,6 +105,7 @@
     <div class="header">Messagerie</div>
 
     <div id="messages"></div>
+    <div id="users"></div>
 
     <div class="input-area">
         <input type="text" id="message" placeholder="Message">
@@ -120,6 +121,13 @@ let currentUser = sessionStorage.getItem("user");
 if (!currentUser) {
     window.location = "login.html";
 }
+
+function chargerUsers() {
+    $("#users").load("users.php");
+}
+
+setInterval(chargerUsers, 2000);
+
 function chargerMessages() {
 
     $.get("recuperer.php", { last_id: last_id }, function(data) {
