@@ -95,6 +95,26 @@
             text-align : right;
             margin-top: 3px;
         }
+
+        #users {
+            background: #f1f0f0;
+            padding: 8px 12px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            border-bottom: 1px solid #ddd;
+            font-size: 13px;
+            scrollbar-width: thin;
+        }
+
+        .user {
+            background: #075e54;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 
@@ -104,8 +124,8 @@
 
     <div class="header">Messagerie</div>
 
-    <div id="messages"></div>
     <div id="users"></div>
+    <div id="messages"></div>
 
     <div class="input-area">
         <input type="text" id="message" placeholder="Message">
