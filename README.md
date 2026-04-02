@@ -20,7 +20,8 @@ https://votre-lien-infinityfree.com
 * Aucun mot de passe requis (connexion par pseudo uniquement)
 * Les utilisateurs sont considérés comme connectés s’ils sont actifs (rafraîchissement ou envoi de message)
 * Les messages sont stockés dans une base de données MySQL
-* Test avec deux onglets ou deux navigateurs pour simuler plusieurs utilisateurs.
+* Test avec deux onglets ou deux navigateurs pour simuler plusieurs utilisateurs
+* La liste des utilisateurs affichés sont ceux actifs sur les 10 dernières secondes.
 
 ---
 
