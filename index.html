@@ -173,6 +173,7 @@
 <script>
 let last_id = 0;
 let currentUser = sessionStorage.getItem("user");
+let currentRoom = "general";
 
 if (!currentUser) {
     window.location = "login.html";
@@ -187,9 +188,7 @@ chargerUsers();
 
 function chargerMessages() {
 
-    let salle = $("#salle").val();
-
-    $.get("recuperer.php", { last_id: last_id, salle: salle }, function(data) {
+    $.get("recuperer.php", { last_id: last_id, salle: currentRoom }, function(data) {
 
         if (data.trim() !== "") {
 
@@ -235,6 +234,7 @@ chargerMessages();
 setInterval(chargerMessages, 2000);
 
 $("#salle").change(function() {
+    currentRoom = $(this).val();
     $("#messages").html("");
     last_id = 0;
     chargerMessages();
@@ -253,7 +253,7 @@ $("#envoyer").click(function() {
     $.post("enregistrer.php", {
         auteur: auteur,
         message: message,
-        salle: $("#salle").val()
+        salle: currentRoom
     });
 
     $("#message").val("");
