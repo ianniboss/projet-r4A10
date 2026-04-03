@@ -131,6 +131,16 @@
             border-radius: 4px;
             font-size: 12px;
         }
+
+        #salle {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            background: #fdfdfd;
+            font-size: 14px;
+            outline: none;
+        }
     </style>
 </head>
 
@@ -144,6 +154,13 @@
     </div>
 
     <div id="users"></div>
+
+    <select id="salle">
+        <option value="general">General</option>
+        <option value="sport">Sport</option>
+        <option value="gaming">Gaming</option>
+    </select>
+
     <div id="messages"></div>
 
     <div class="input-area">
@@ -170,7 +187,9 @@ chargerUsers();
 
 function chargerMessages() {
 
-    $.get("recuperer.php", { last_id: last_id }, function(data) {
+    let salle = $("#salle").val();
+
+    $.get("recuperer.php", { last_id: last_id, salle: salle }, function(data) {
 
         if (data.trim() !== "") {
 
@@ -215,6 +234,12 @@ function chargerMessages() {
 chargerMessages();
 setInterval(chargerMessages, 2000);
 
+$("#salle").change(function() {
+    $("#messages").html("");
+    last_id = 0;
+    chargerMessages();
+});
+
 $("#envoyer").click(function() {
 
     let auteur = currentUser;
@@ -227,7 +252,8 @@ $("#envoyer").click(function() {
 
     $.post("enregistrer.php", {
         auteur: auteur,
-        message: message
+        message: message,
+        salle: $("#salle").val()
     });
 
     $("#message").val("");
