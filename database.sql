@@ -19,3 +19,18 @@ CREATE TABLE users (
 -- pour les salles de chat
 ALTER TABLE messages ADD salle VARCHAR(50);
 ALTER TABLE users ADD salle VARCHAR(50);
+
+ALTER TABLE messages AUTO_INCREMENT = 1;
+ALTER TABLE users AUTO_INCREMENT = 1;
+
+INSERT INTO messages (auteur, contenu, salle) VALUES
+('Lucas', 'Bienvenue dans notre messagerie : WhatsDown!', 'general'),
+('Ian', 'Slt !', 'general'),
+('Lucas', 'Tu aime le basket?', 'sport'),
+('Ian', 'Oui, je le fais quasiment chaque soir', 'sport'),
+('Lucas', 'Viens jouer Roblox avec moi, Ian', 'gaming'),
+('Ian', 'Vas-y', 'gaming');
+
+INSERT INTO users (pseudo, salle) VALUES
+('Azlan', 'general'),
+('Ian', 'sport');
