@@ -18,3 +18,4 @@ CREATE TABLE users (
 
 -- pour les salles de chat
 ALTER TABLE messages ADD salle VARCHAR(50);
+ALTER TABLE users ADD salle VARCHAR(50);

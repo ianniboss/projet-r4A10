@@ -1,7 +1,11 @@
 <?php
 require("config.php");
 
-$sql = "SELECT pseudo FROM users WHERE last_active > NOW() - INTERVAL 10 SECOND";
+$salle = $_GET['salle'];
+
+$sql = "SELECT pseudo FROM users 
+        WHERE last_active > NOW() - INTERVAL 10 SECOND 
+        AND salle = '$salle'";
 
 $result = $conn->query($sql);
 

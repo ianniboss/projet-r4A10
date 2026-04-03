@@ -180,7 +180,7 @@ if (!currentUser) {
 }
 
 function chargerUsers() {
-    $("#users").load("users.php");
+    $("#users").load("users.php?salle=" + currentRoom);
 }
 
 setInterval(chargerUsers, 2000);
