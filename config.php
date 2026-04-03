@@ -1,9 +1,6 @@
 <?php
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "projetR4A10";
+require_once 'credentials.php';
 
 $conn = new mysqli($host, $user, $pass, $db);
 

@@ -31,6 +31,6 @@ INSERT INTO messages (auteur, contenu, salle) VALUES
 ('Lucas', 'Viens jouer Roblox avec moi, Ian', 'gaming'),
 ('Ian', 'Vas-y', 'gaming');
 
-INSERT INTO users (pseudo, salle) VALUES
-('Azlan', 'general'),
-('Ian', 'sport');
+INSERT INTO users (pseudo, salle, last_active) VALUES
+('Azlan', 'general', NOW()),
+('Ian', 'sport', NOW());
