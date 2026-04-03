@@ -188,7 +188,11 @@ chargerUsers();
 
 function chargerMessages() {
 
-    $.get("recuperer.php", { last_id: last_id, salle: currentRoom }, function(data) {
+    $.get("recuperer.php", { 
+        last_id: last_id, 
+        salle: currentRoom,
+        user: currentUser
+    }, function(data) {
 
         if (data.trim() !== "") {
 
@@ -251,7 +255,7 @@ $("#envoyer").click(function() {
     }
 
     $.post("enregistrer.php", {
-        auteur: auteur,
+        auteur: currentUser,
         message: message,
         salle: currentRoom
     });
