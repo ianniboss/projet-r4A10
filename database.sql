@@ -15,3 +15,6 @@ CREATE TABLE users (
     pseudo VARCHAR(50),
     last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- pour les salles de chat
+ALTER TABLE messages ADD salle VARCHAR(50);
