@@ -252,16 +252,12 @@ setInterval(chargerMessages, 2000);
 
 $(".room").click(function() {
 
-    // remove active from all
     $(".room").removeClass("active");
 
-    // add active to clicked
     $(this).addClass("active");
 
-    // change room
     currentRoom = $(this).data("room");
 
-    // reset messages
     $("#messages").html("");
     last_id = 0;
 
